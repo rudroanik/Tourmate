@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileFragment">
+
+
+   <LinearLayout
+       android:layout_width="301dp"
+       android:layout_height="414dp"
+       android:layout_marginLeft="10dp"
+       android:orientation="vertical">
+
+       <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+           android:id="@+id/profile_image"
+           android:layout_width="96dp"
+           android:layout_height="96dp"
+           android:layout_marginLeft="10dp"
+           android:layout_marginTop="20dp"
+           android:src="@drawable/man"
+           app:civ_border_color="#FF000000"
+           app:civ_border_width="2dp" />
+
+       <TextView
+           android:id="@+id/nametv"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/profile_image"
+           android:layout_marginLeft="20dp"
+           android:layout_marginTop="40dp"
+           android:fontFamily="monospace"
+           android:text="NAME" />
+
+       <TextView
+           android:id="@+id/name"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/nametv"
+           android:layout_marginLeft="20dp"
+           android:layout_marginTop="10dp"
+           android:fontFamily="monospace"
+           android:text="Example"
+           android:textColor="#000" />
+
+
+       <TextView
+           android:id="@+id/emailtv"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/name"
+           android:layout_marginLeft="20dp"
+           android:layout_marginTop="10dp"
+           android:fontFamily="monospace"
+           android:text="EMAIL" />
+
+       <TextView
+           android:id="@+id/email"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/emailtv"
+           android:layout_marginLeft="20dp"
+           android:layout_marginTop="10dp"
+           android:fontFamily="monospace"
+           android:text="example@gmail.com"
+           android:textColor="#000" />
+       <TextView
+           android:id="@+id/addresstv"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/name"
+           android:layout_marginLeft="20dp"
+           android:layout_marginTop="10dp"
+           android:fontFamily="monospace"
+           android:text="ADDRESS" />
+       <TextView
+           android:id="@+id/address"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/emailtv"
+           android:layout_marginLeft="20dp"
+           android:layout_marginTop="10dp"
+           android:fontFamily="monospace"
+           android:text="Dhaka"
+           android:textColor="#000" />
+
+       <TextView
+           android:id="@+id/emergencytv"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/name"
+           android:layout_marginLeft="20dp"
+           android:layout_marginTop="10dp"
+           android:fontFamily="monospace"
+           android:text="Emergency" />
+
+       <TextView
+           android:id="@+id/emergency"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/emailtv"
+           android:layout_marginLeft="20dp"
+           android:layout_marginTop="10dp"
+           android:fontFamily="monospace"
+           android:text="017000000"
+           android:textColor="#000" />
+   </LinearLayout>
+
+
+</FrameLayout>

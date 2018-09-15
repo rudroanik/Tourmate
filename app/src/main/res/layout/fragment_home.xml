@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".HomeFragment">
+
+
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    app:cardBackgroundColor="#023f6b"
+    android:layout_marginTop="50dp"
+    android:layout_marginLeft="10dp"
+    app:cardCornerRadius="10dp"
+    android:layout_marginRight="10dp">
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="40dp"
+       android:layout_marginLeft="10dp"
+       android:textSize="18dp"
+       android:textColor="#fff"
+       android:text="Cox's Bazar Tour"/>
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="20dp"
+       android:layout_marginLeft="200dp"
+       android:textSize="15dp"
+       android:textColor="#fcf9f9"
+       android:text="Remaining Balance"/>
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="50dp"
+       android:layout_marginLeft="230dp"
+       android:textSize="15dp"
+       android:textColor="#fcf9f9"
+       android:text="৳"/>
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="50dp"
+       android:layout_marginLeft="250dp"
+       android:textSize="15dp"
+       android:textColor="#fcf9f9"
+       android:text="100.0"/>
+
+
+
+</android.support.v7.widget.CardView>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_gravity="center_vertical"
+       android:layout_marginLeft="40dp">
+
+      <ImageView
+          android:id="@+id/event_imageview"
+          android:layout_width="68dp"
+          android:layout_height="68dp"
+          android:layout_marginRight="40dp"
+          android:src="@drawable/event" />
+
+      <ImageView
+          android:id="@+id/location_imageview"
+          android:layout_width="68dp"
+          android:layout_height="68dp"
+          android:layout_marginRight="40dp"
+          android:src="@drawable/locationpng" />
+      <ImageView
+          android:id="@+id/weather"
+          android:layout_width="68dp"
+          android:layout_height="68dp"
+          android:layout_marginRight="40dp"
+          android:src="@drawable/weather" />
+
+   </LinearLayout>
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginLeft="35dp"
+       android:layout_marginTop="320dp"
+       android:text="create event"/>
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginLeft="140dp"
+       android:layout_marginTop="320dp"
+       android:text="nearby place"/>
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginLeft="270dp"
+       android:layout_marginTop="320dp"
+       android:text="weather"/>
+
+
+
+
+
+
+
+</FrameLayout>
