@@ -14,13 +14,14 @@ import android.widget.Toast;
 
 public class HomeFragment extends Fragment {
 
-    ImageView mlocation_imageview;
+    ImageView mCreateEvent, mlocation_imageview;
 
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState ) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_home, container, false);
+        mCreateEvent = v.findViewById((R.id.event_imageview));
         mlocation_imageview = v.findViewById(R.id.location_imageview);
         
         mlocation_imageview.setOnClickListener(new View.OnClickListener() {
@@ -30,6 +31,14 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        mCreateEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         return v;
     }
 
