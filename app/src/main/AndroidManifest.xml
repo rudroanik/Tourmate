@@ -43,9 +43,13 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
             android:theme="@style/NoActonbar" />
-        <activity android:name=".ViewEventActivity" />
-        <activity android:name=".SelectedEventActivity" />
-        <activity android:name=".AddEventActivity"></activity>
+        <activity
+            android:name=".ViewEventActivity"
+            android:theme="@style/NoActonbar" />
+        <activity
+            android:name=".SelectedEventActivity"
+            android:theme="@style/NoActonbar" />
+
     </application>
 
 </manifest>
