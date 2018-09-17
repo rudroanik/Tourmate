@@ -1,6 +1,7 @@
 package com.tourmate.com.tourmate;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -37,7 +38,10 @@ public class MainActivity extends AppCompatActivity {
                         selectedFragment = HomeFragment.newInstance();
                         break;
                     case R.id.travellist:
-                        selectedFragment = EventlistFragment.newInstance();
+                        Intent intent = new Intent(MainActivity.this,ViewEventActivity.class);
+                        startActivity(intent);
+
+                        //selectedFragment = EventlistFragment.newInstance();
                         break;
                     case R.id.person:
                         selectedFragment = ProfileFragment.newInstance();
