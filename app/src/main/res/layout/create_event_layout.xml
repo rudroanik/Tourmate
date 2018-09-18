@@ -95,13 +95,13 @@
 
         </LinearLayout>
     </ScrollView>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnEventSave"
-        android:text="Save"
-        android:textAllCaps="true"
-        android:textStyle="bold"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        android:layout_marginHorizontal="25dp"/>
+    <!--<Button-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/btnEventSave"-->
+        <!--android:text="Save"-->
+        <!--android:textAllCaps="true"-->
+        <!--android:textStyle="bold"-->
+        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"-->
+        <!--android:layout_marginHorizontal="25dp" />-->
 </LinearLayout>

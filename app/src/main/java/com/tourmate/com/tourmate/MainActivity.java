@@ -72,10 +72,11 @@ public class MainActivity extends AppCompatActivity {
                 selectedFragment = new HomeFragment();
                 break;
             case R.id.travellist:
-                Intent intent = new Intent(MainActivity.this,ViewEventActivity.class);
-                startActivity(intent);
-
-                //selectedFragment = EventlistFragment.newInstance();
+                selectedFragment = new FragmentViewEvents();
+//                Intent intent = new Intent(MainActivity.this,ViewEventActivity.class);
+//                startActivity(intent);
+//
+//                //selectedFragment = EventlistFragment.newInstance();
                 break;
             case R.id.person:
                 selectedFragment = new ProfileFragment();

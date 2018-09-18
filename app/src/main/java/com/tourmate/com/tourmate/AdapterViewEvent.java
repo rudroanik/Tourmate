@@ -61,7 +61,7 @@ public class AdapterViewEvent extends RecyclerView.Adapter<AdapterViewEvent.MyVi
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         TravelEvent travelEvent = eventList.get(position);
         holder.mDestination.setText(travelEvent.getDestination());
-        holder.mBudget.setText("Estimated Budget: " + travelEvent.getEstimatedBudget() + " TK");
+        holder.mBudget.setText("Estimated Budget: " + travelEvent.getEstimatedBudget() + " ৳");
         holder.mFromDate.setText(travelEvent.getFromDate());
         holder.mToDate.setText(travelEvent.getToDate());
 

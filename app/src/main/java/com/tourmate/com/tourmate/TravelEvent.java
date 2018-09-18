@@ -1,14 +1,15 @@
 package com.tourmate.com.tourmate;
 
 public class TravelEvent {
-    private String eventID, destination, estimatedBudget, fromDate, toDate;
+    private String eventID, destination, fromDate, toDate;
+    private double estimatedBudget;
 
-    public TravelEvent(String eventID, String destination, String estimatedBudget, String fromDate, String toDate) {
+    public TravelEvent(String eventID, String destination, double estimatedBudget, String fromDate, String toDate) {
         this.eventID = eventID;
         this.destination = destination;
-        this.estimatedBudget = estimatedBudget;
         this.fromDate = fromDate;
         this.toDate = toDate;
+        this.estimatedBudget = estimatedBudget;
     }
 
     public TravelEvent() {
@@ -30,14 +31,6 @@ public class TravelEvent {
         this.destination = destination;
     }
 
-    public String getEstimatedBudget() {
-        return estimatedBudget;
-    }
-
-    public void setEstimatedBudget(String estimatedBudget) {
-        this.estimatedBudget = estimatedBudget;
-    }
-
     public String getFromDate() {
         return fromDate;
     }
@@ -52,5 +45,13 @@ public class TravelEvent {
 
     public void setToDate(String toDate) {
         this.toDate = toDate;
+    }
+
+    public double getEstimatedBudget() {
+        return estimatedBudget;
+    }
+
+    public void setEstimatedBudget(double estimatedBudget) {
+        this.estimatedBudget = estimatedBudget;
     }
 }

@@ -9,6 +9,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -27,10 +30,10 @@ import java.util.Calendar;
 public class FragmentCreateEvent extends Fragment {
     private EditText mDestination, mBudget, mFromDate, mToDate;
     private Button mSaveEvent, mFromDateButton, mToDateButton;
-    private DatabaseReference rootRef;
-    private DatabaseReference userRef;
-    private DatabaseReference databaseTravelEvents;
-    private FirebaseUser user;
+//    private DatabaseReference rootRef;
+//    private DatabaseReference userRef;
+//    private DatabaseReference databaseTravelEvents;
+//    private FirebaseUser user;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,13 +42,10 @@ public class FragmentCreateEvent extends Fragment {
         mBudget = v.findViewById(R.id.et_estimated_budget);
         mFromDate = v.findViewById(R.id.et_from_date);
         mToDate = v.findViewById(R.id.et_to_date);
-        mSaveEvent = v.findViewById(R.id.btnEventSave);
+        //mSaveEvent = v.findViewById(R.id.btnEventSave);
         mFromDateButton = v.findViewById(R.id.btn_from_date);
         mToDateButton = v.findViewById(R.id.btn_to_date);
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        rootRef = FirebaseDatabase.getInstance().getReference();
-        userRef = rootRef.child("users");
 
 
         mFromDateButton.setOnClickListener(new View.OnClickListener() {
@@ -62,16 +62,14 @@ public class FragmentCreateEvent extends Fragment {
             }
         });
 
-        mSaveEvent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (user != null){
-                    String uid = user.getUid();
-                    saveEvent(uid);
-                }
-//                
-            }
-        });
+//        mSaveEvent.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                saveEvent();
+//
+//
+//            }
+//        });
         return v;
     }
 
@@ -81,31 +79,53 @@ public class FragmentCreateEvent extends Fragment {
         getActivity().setTitle("Create New Event");
     }
 
-    public void saveEvent(String userId){
-        String destination = mDestination.getText().toString().trim();
-        String budget = mBudget.getText().toString().trim();
-        String fromDate = mFromDate.getText().toString().trim();
-        String toDate = mToDate.getText().toString().trim();
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
-        if (TextUtils.isEmpty(destination)){
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.btn_save_menu,menu);
+        return;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.btn_save_data){
+            saveEvent();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void saveEvent(){
+
+
+        if (TextUtils.isEmpty(mDestination.getText().toString().trim())){
             mDestination.setError("Please Provide Your Travel Destination");
             mDestination.requestFocus();
         }
-        else if (TextUtils.isEmpty(budget)){
+        else if (TextUtils.isEmpty(mBudget.getText().toString().trim())){
             mBudget.setError("Please Provide Your Estimated Budget");
             mBudget.requestFocus();
         }
-        else if (TextUtils.isEmpty(fromDate)){
+        else if (TextUtils.isEmpty(mFromDate.getText().toString().trim())){
             Toast.makeText(getActivity(), "Please Select Your Event Start Date", Toast.LENGTH_SHORT).show();
         }
-        else if (TextUtils.isEmpty(toDate)){
+        else if (TextUtils.isEmpty(mToDate.getText().toString().trim())){
             Toast.makeText(getActivity(), "Please Select Your Event Close Date", Toast.LENGTH_SHORT).show();
         }
         else{
-            databaseTravelEvents = userRef.child(userId).child("travel_events");
-            String id = databaseTravelEvents.push().getKey();
+            String destination = mDestination.getText().toString().trim();
+            double budget = Double.parseDouble(mBudget.getText().toString().trim());
+            String fromDate = mFromDate.getText().toString().trim();
+            String toDate = mToDate.getText().toString().trim();
+            String id = DBHelper.TRAVEL_EVENTS_REF.push().getKey();
             TravelEvent travelEvent = new TravelEvent(id,destination,budget,fromDate,toDate);
-            databaseTravelEvents.child(id).setValue(travelEvent);
+            DBHelper.TRAVEL_EVENTS_REF.child(id).setValue(travelEvent);
             Toast.makeText(getActivity(), "Travel Event Added Successfully", Toast.LENGTH_SHORT).show();
         }
     }
