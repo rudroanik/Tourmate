@@ -12,64 +12,52 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class AdapterTravelExpense extends RecyclerView.Adapter<AdapterTravelExpense.MyViewHolder> {
-    private ArrayList<TravelEvent> eventList = new ArrayList<>();
+    private ArrayList<TravelExpense> expenseList = new ArrayList<>();
     Context ctx;
 
-    public AdapterTravelExpense(ArrayList<TravelEvent> eventList, Context ctx) {
-        this.eventList = eventList;
+    public AdapterTravelExpense(ArrayList<TravelExpense> expenseList, Context ctx) {
+        this.expenseList = expenseList;
         this.ctx = ctx;
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView mDestination, mBudget, mFromDate, mToDate;
-        ArrayList<TravelEvent> eventList = new ArrayList<>();
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView mExpenseDateAndTime, mExpenseDetails, mExpenseAmount;
+        ArrayList<TravelExpense> eventList = new ArrayList<>();
         Context ctx;
-        public MyViewHolder(View itemView, Context ctx, ArrayList<TravelEvent> eventList) {
+        public MyViewHolder(View itemView, Context ctx, ArrayList<TravelExpense> expenseList) {
             super(itemView);
             this.ctx = ctx;
-            this.eventList = eventList;
-            itemView.setOnClickListener(this);
-            this.mDestination = itemView.findViewById(R.id.tv_destination);
-            this.mBudget = itemView.findViewById(R.id.tv_estimated_budget);
-            this.mFromDate = itemView.findViewById(R.id.tv_from_date);
-            this.mToDate = itemView.findViewById(R.id.tv_to_date);
+            this.eventList = expenseList;
+            this.mExpenseDateAndTime = itemView.findViewById(R.id.tv_expense_date_and_time);
+            this.mExpenseDetails = itemView.findViewById(R.id.tv_expense_details);
+            this.mExpenseAmount = itemView.findViewById(R.id.tv_expense_amount);
+
         }
 
-        @Override
-        public void onClick(View v) {
-            int position = getAdapterPosition();
-            TravelEvent travelEvent = this.eventList.get(position);
-            Intent intent = new Intent(this.ctx,SelectedEventActivity.class);
-            intent.putExtra("event_id",travelEvent.getEventID());
-            intent.putExtra("event_destination",travelEvent.getDestination());
-            intent.putExtra("event_budget",travelEvent.getEstimatedBudget());
-            intent.putExtra("event_from_date",travelEvent.getFromDate());
-            intent.putExtra("event_to_date",travelEvent.getToDate());
-            this.ctx.startActivity(intent);
-        }
+
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.view_event_card_view_layout, parent, false);
-        return new MyViewHolder(view,ctx,eventList);
+                .inflate(R.layout.view_expense_card_view_layout, parent, false);
+        return new MyViewHolder(view,ctx,expenseList);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        TravelEvent travelEvent = eventList.get(position);
-        holder.mDestination.setText(travelEvent.getDestination());
-        holder.mBudget.setText("Estimated Budget: " + travelEvent.getEstimatedBudget() + " ৳");
-        holder.mFromDate.setText(travelEvent.getFromDate());
-        holder.mToDate.setText(travelEvent.getToDate());
+        TravelExpense travelExpense = expenseList.get(position);
+        holder.mExpenseDateAndTime.setText(travelExpense.getExpenseDateAndTime());
+        holder.mExpenseDetails.setText(travelExpense.getExpenseDetails());
+        holder.mExpenseAmount.setText(String.valueOf(travelExpense.getExpenseAmount()) + " ৳");
+
 
     }
 
     @Override
     public int getItemCount() {
-        return eventList.size();
+        return expenseList.size();
     }
 
 

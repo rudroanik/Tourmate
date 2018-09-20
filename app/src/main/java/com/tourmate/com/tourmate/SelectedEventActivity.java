@@ -1,14 +1,20 @@
 package com.tourmate.com.tourmate;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,6 +29,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class SelectedEventActivity extends AppCompatActivity {
@@ -31,6 +38,7 @@ public class SelectedEventActivity extends AppCompatActivity {
     private Button mViewExpenseHistory;
     private String event_id;
     private double totalExpense;
+    RecyclerView.Adapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +53,8 @@ public class SelectedEventActivity extends AppCompatActivity {
         mTotalExpense = findViewById(R.id.tv_s_total_expense);
         mAddExpenseButton = findViewById(R.id.iv_add_expense_button);
         mViewExpenseHistory = findViewById(R.id.btn_view_expense_history);
+
+
 
         event_id = getIntent().getStringExtra("event_id");
         mDestination.setText(getIntent().getStringExtra("event_destination"));
@@ -82,7 +92,7 @@ public class SelectedEventActivity extends AppCompatActivity {
         mAddExpenseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(SelectedEventActivity.this);
+                final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(SelectedEventActivity.this);
                 LayoutInflater inflater = getLayoutInflater();
                 final View dialogView = inflater.inflate(R.layout.entry_expense_layout,null);
                 dialogBuilder.setView(dialogView);
@@ -113,6 +123,8 @@ public class SelectedEventActivity extends AppCompatActivity {
                             TravelExpense travelExpense = new TravelExpense(id,details,formattedDate,amount,event_id);
                             DBHelper.TRAVEL_EXPENSES_REF.child(id).setValue(travelExpense);
                             Toast.makeText(SelectedEventActivity.this, "Travel Expense Added Successfully", Toast.LENGTH_SHORT).show();
+                            mExpenseDetails.setText("");
+                            mExpenseAmount.setText("");
                         }
                     }
                 });
@@ -126,7 +138,39 @@ public class SelectedEventActivity extends AppCompatActivity {
         mViewExpenseHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(SelectedEventActivity.this);
+                LayoutInflater inflater = getLayoutInflater();
+                final View dialogView = inflater.inflate(R.layout.view_expense_layout,null);
+                dialogBuilder.setView(dialogView);
+                final RecyclerView mViewExpense = dialogView.findViewById(R.id.rv_view_expense);
+                mViewExpense.setHasFixedSize(true);
 
+
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(SelectedEventActivity.this);
+                mViewExpense.setLayoutManager(mLayoutManager);
+                mViewExpense.setItemAnimator(new DefaultItemAnimator());
+                final ArrayList<TravelExpense> travelExpenses = new ArrayList<>();
+                Query query = DBHelper.TRAVEL_EXPENSES_REF.orderByChild("eventID").equalTo(event_id);
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        travelExpenses.clear();
+                        for(DataSnapshot ds : dataSnapshot.getChildren()){
+                            TravelExpense travelExpense = ds.getValue(TravelExpense.class);
+                            travelExpenses.add(travelExpense);
+                        }
+                        mAdapter = new AdapterTravelExpense(travelExpenses,SelectedEventActivity.this);
+                        mViewExpense.setAdapter(mAdapter);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                dialogBuilder.setTitle("Expense History");
+                AlertDialog alertDialog = dialogBuilder.create();
+                alertDialog.show();
             }
         });
     }
