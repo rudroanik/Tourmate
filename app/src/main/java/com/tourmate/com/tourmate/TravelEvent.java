@@ -1,8 +1,17 @@
 package com.tourmate.com.tourmate;
 
 public class TravelEvent {
-    private String eventID, destination, fromDate, toDate;
+    private String eventID, destination, fromDate, toDate, userID;
     private double estimatedBudget;
+
+    public TravelEvent(String eventID, String destination, double estimatedBudget, String fromDate, String toDate, String userID) {
+        this.eventID = eventID;
+        this.destination = destination;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+        this.userID = userID;
+        this.estimatedBudget = estimatedBudget;
+    }
 
     public TravelEvent(String eventID, String destination, double estimatedBudget, String fromDate, String toDate) {
         this.eventID = eventID;
@@ -53,5 +62,12 @@ public class TravelEvent {
 
     public void setEstimatedBudget(double estimatedBudget) {
         this.estimatedBudget = estimatedBudget;
+    }
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 }

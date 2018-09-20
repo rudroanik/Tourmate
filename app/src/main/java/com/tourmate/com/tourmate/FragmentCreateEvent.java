@@ -119,12 +119,14 @@ public class FragmentCreateEvent extends Fragment {
             Toast.makeText(getActivity(), "Please Select Your Event Close Date", Toast.LENGTH_SHORT).show();
         }
         else{
+            DBHelper.TRAVEL_EVENTS_REF.keepSynced(true);
             String destination = mDestination.getText().toString().trim();
             double budget = Double.parseDouble(mBudget.getText().toString().trim());
             String fromDate = mFromDate.getText().toString().trim();
             String toDate = mToDate.getText().toString().trim();
+            String userId = DBHelper.FIREBASE_USER.getUid();
             String id = DBHelper.TRAVEL_EVENTS_REF.push().getKey();
-            TravelEvent travelEvent = new TravelEvent(id,destination,budget,fromDate,toDate);
+            TravelEvent travelEvent = new TravelEvent(id,destination,budget,fromDate,toDate,userId);
             DBHelper.TRAVEL_EVENTS_REF.child(id).setValue(travelEvent);
             Toast.makeText(getActivity(), "Travel Event Added Successfully", Toast.LENGTH_SHORT).show();
         }
