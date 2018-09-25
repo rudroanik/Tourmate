@@ -35,8 +35,14 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void startApp() {
-        Intent intent = new Intent(SplashActivity.this, WelcomeLogInActivity.class);
+        Intent intent;
+        if (DBHelper.FIREBASE_USER != null){
+            intent = new Intent(SplashActivity.this,MainActivity.class);
+        }
+        else {
+            intent = new Intent(SplashActivity.this, WelcomeLogInActivity.class);
+        }
         startActivity(intent);
     }
-    }
+}
 

@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:text="Expense Details"/>
+                    android:text="Details"/>
                 <TextView
                     android:id="@+id/tv_expense_amount"
                     android:layout_width="0dp"
