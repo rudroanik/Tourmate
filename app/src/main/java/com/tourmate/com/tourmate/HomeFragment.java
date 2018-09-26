@@ -22,7 +22,7 @@ public class HomeFragment extends Fragment {
         getActivity().setTitle("Home");
     }
 
-    ImageView mCreateEvent, mlocation_imageview;
+    ImageView mCreateEvent, mlocation_imageview,mWeather;
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState ) {
@@ -31,6 +31,16 @@ public class HomeFragment extends Fragment {
 
         mCreateEvent = v.findViewById((R.id.event_imageview));
         mlocation_imageview = v.findViewById(R.id.location_imageview);
+        mWeather = v.findViewById(R.id.weather);
+
+
+        mWeather.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick( View v ) {
+                Intent intent = new Intent(getActivity(),WeatherActivity.class);
+                startActivity(intent);
+            }
+        });
 
         mlocation_imageview.setOnClickListener(new View.OnClickListener() {
             @Override

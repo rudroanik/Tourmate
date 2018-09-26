@@ -1,6 +1,7 @@
 package com.tourmate.com.tourmate;
 
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -51,11 +52,11 @@ public class MapsActivity extends FragmentActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         {
             checkUserLocationPermission();
         }
+
 
         mbank= findViewById(R.id.bank);
         matm= findViewById(R.id.atm);

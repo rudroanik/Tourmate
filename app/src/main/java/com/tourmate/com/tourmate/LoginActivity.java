@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
@@ -24,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText memail,mpassword;
     Button next;
     private FirebaseAuth mAuth;
+    FirebaseUser user;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -39,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick( View v ) {
+
                 userLogIn();
 
 

@@ -47,7 +47,10 @@
         <activity
             android:name=".SelectedEventActivity"
             android:theme="@style/NoActonbar" />
-
+        <activity android:name=".WeatherActivity"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".MainActivity"
+            android:label="Weather Update"></activity>
     </application>
 
 </manifest>
