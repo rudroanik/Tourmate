@@ -4,7 +4,10 @@ public class User {
 
     private String name,email,phone,address;
 
-    public User( String name, String email, String phone, String address ) {
+    public User() {
+    }
+
+    public User(String name, String email, String phone, String address ) {
         this.name = name;
         this.email = email;
         this.phone = phone;
