@@ -5,8 +5,8 @@
     <item
         android:id="@+id/btn_save_data"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_done_black_24dp"
+        android:icon="@drawable/done_icon"
         android:title=""
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
 
 </menu>

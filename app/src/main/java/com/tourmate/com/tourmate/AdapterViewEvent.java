@@ -46,6 +46,7 @@ public class AdapterViewEvent extends RecyclerView.Adapter<AdapterViewEvent.MyVi
             intent.putExtra("event_from_date",travelEvent.getFromDate());
             intent.putExtra("event_to_date",travelEvent.getToDate());
             this.ctx.startActivity(intent);
+
         }
     }
 
