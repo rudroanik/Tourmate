@@ -1,7 +1,6 @@
 package com.tourmate.com.tourmate;
 
 
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -28,6 +27,16 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.tourmate.com.tourmate.Place.PlaceResponse;
+import com.tourmate.com.tourmate.Place.Result;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MapsActivity extends FragmentActivity implements
         OnMapReadyCallback,
@@ -38,14 +47,15 @@ public class MapsActivity extends FragmentActivity implements
     private GoogleMap mMap;
     private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest;
+    private PlaceClient placeClient;
     private Location lastLocation;
     private Marker currentUserLocationMarker;
     private static final int Request_User_Location_Code = 99;
-    private double latitide, longitude;
+    private static double latitide, longitude;
     private int ProximityRadius = 10000;
     private ImageView mbank,mhotel,mresturent,matm;
 
-
+    private static String BASE_URL = "https://maps.googleapis.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +66,11 @@ public class MapsActivity extends FragmentActivity implements
         {
             checkUserLocationPermission();
         }
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create()).build();
+        placeClient = retrofit.create(PlaceClient.class);
 
 
         mbank= findViewById(R.id.bank);
@@ -81,8 +96,37 @@ public class MapsActivity extends FragmentActivity implements
                 Toast.makeText(MapsActivity.this, "ATM is clicked", Toast.LENGTH_SHORT).show();
             }
         });
+        mresturent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick( View v ) {
+                String url = String.format("/maps/api/place/nearbysearch/json?location=%f,%f&radius=500&type=restaurant&keyword=%s", latitide, longitude, getString(R.string.pplace_api_key));
+                Call<PlaceResponse> placeResponseCall = placeClient.getPlace(url);
+                placeResponseCall.enqueue(new Callback<PlaceResponse>() {
+                    @Override
+                    public void onResponse( Call<PlaceResponse> call, Response<PlaceResponse> response ) {
+                        if (response.code() == 200) {
+                            PlaceResponse placeResponseCall = response.body();
+                            List<Result> results = placeResponseCall.getResults();
+                            for (int i = 0; i < results.size(); i++) {
+                                double lat = results.get(i).getGeometry().getLocation().getLat();
+                                double lon = results.get(i).getGeometry().getLocation().getLng();
+                                LatLng restaurant = new LatLng(latitide, longitude);
+                                mMap.addMarker(new MarkerOptions().position(restaurant));
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(restaurant,14));
+                            }
+                        }
+                    }
 
+                    @Override
+                    public void onFailure( Call<PlaceResponse> call, Throwable t ) {
+
+                    }
+                });
+
+            }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
+    });
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);

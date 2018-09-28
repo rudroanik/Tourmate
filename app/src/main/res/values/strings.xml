@@ -5,4 +5,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">Map</string>
     <string name="weather_api_key">a1626b59ce9f98494d5deb9139296cec</string>
+    <string name="pplace_api_key">AIzaSyD0PYdqJmEVNt39X5ED93k8Mg0TIVHcym8</string>
 </resources>
